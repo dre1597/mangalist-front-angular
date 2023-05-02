@@ -4,12 +4,12 @@
   margin: 100px 0;
 }
 
-mat-form-field {
+.form-group {
   width: 100%;
   min-width: 500px;
 }
 
-mat-card-header, mat-card-content {
+.card-header, .card-body {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;

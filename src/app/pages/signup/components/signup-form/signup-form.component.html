@@ -1,41 +1,176 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Register</mat-card-title>
-  </mat-card-header>
+<div [attr.data-bs-theme]="'dark'" class="card">
+  <div class="card-header p-3">
+    <h3 class="card-title">Register</h3>
+  </div>
 
-  <mat-card-content>
-    <form (ngSubmit)="handleSubmit()" [formGroup]="form">
-      <p>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input formControlName="name" matInput type="text" />
-        </mat-form-field>
-      </p>
+  <div class="card-body">
+    <form (ngSubmit)="handleSubmit()" [formGroup]="form" novalidate>
+      <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <input
+          class="form-control"
+          formControlName="name"
+          id="name"
+          type="text"
+        />
+        <span *ngIf="!name.valid && name.touched" class="form-error-message">
+          <span *ngIf="name.errors ? name.errors['required'] : null">
+            Name is required
+          </span>
+          <span *ngIf="name.errors ? name.errors['minlength'] : null">
+            Name must be at least
+            {{ name.errors ? name.errors["minlength"].requiredLength : "" }}
+            characters long. You have used
+            {{ name.errors ? name.errors["minlength"].actualLength : "" }}.
+          </span>
+          <span *ngIf="name.errors ? name.errors['maxlength'] : null">
+            Name must be at most
+            {{ name.errors ? name.errors["maxlength"].requiredLength : "" }}
+            characters long. You have used
+            {{ name.errors ? name.errors["maxlength"].actualLength : "" }}.
+          </span>
+        </span>
+      </div>
 
-      <p>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input formControlName="email" matInput type="email" />
-        </mat-form-field>
-      </p>
+      <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <input
+          class="form-control"
+          formControlName="email"
+          id="email"
+          type="email"
+        />
+        <span *ngIf="!email.valid && email.touched" class="form-error-message">
+          <span *ngIf="email.errors ? email.errors['required'] : null">
+            Email is required
+          </span>
+          <span *ngIf="email.errors ? email.errors['email'] : null">
+            Email format is invalid
+          </span>
+        </span>
+      </div>
 
-      <p>
-        <mat-form-field>
-          <mat-label> Password</mat-label>
-          <input formControlName="password" matInput type="password" />
-        </mat-form-field>
-      </p>
+      <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <input
+          class="form-control"
+          formControlName="password"
+          id="password"
+          type="password"
+        />
+        <span
+          *ngIf="!password.valid && password.touched"
+          class="form-error-message"
+        >
+          <span *ngIf="password.errors ? password.errors['required'] : null">
+            Password is required
+          </span>
+          <span *ngIf="password.errors ? password.errors['minlength'] : null">
+            Password must be at least
+            {{
+              password.errors ? password.errors["minlength"].requiredLength : ""
+            }}
+            characters long. You have used
+            {{
+              password.errors ? password.errors["minlength"].actualLength : ""
+            }}.
+          </span>
+          <span *ngIf="password.errors ? password.errors['maxlength'] : null">
+            Password must be at most
+            {{
+              password.errors ? password.errors["maxlength"].requiredLength : ""
+            }}
+            characters long. You have used
+            {{
+              password.errors ? password.errors["maxlength"].actualLength : ""
+            }}.
+          </span>
+        </span>
+      </div>
 
-      <p>
-        <mat-form-field>
-          <mat-label>Confirm Password</mat-label>
-          <input formControlName="confirmPassword" matInput type="password" />
-        </mat-form-field>
-      </p>
+      <div class="form-group mb-3">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          class="form-control"
+          formControlName="confirmPassword"
+          id="confirmPassword"
+          type="password"
+        />
+        <span
+          *ngIf="!confirmPassword.valid && confirmPassword.touched"
+          class="form-error-message"
+        >
+          <span
+            *ngIf="
+              confirmPassword.errors ? confirmPassword.errors['required'] : null
+            "
+          >
+            Confirm Password is required
+          </span>
+          <span
+            *ngIf="
+              confirmPassword.errors
+                ? confirmPassword.errors['minlength']
+                : null
+            "
+          >
+            Confirm Password must be at least
+            {{
+              confirmPassword.errors
+                ? confirmPassword.errors["minlength"].requiredLength
+                : ""
+            }}
+            characters long. You have used
+            {{
+              confirmPassword.errors
+                ? confirmPassword.errors["minlength"].actualLength
+                : ""
+            }}.
+          </span>
+          <span
+            *ngIf="
+              confirmPassword.errors
+                ? confirmPassword.errors['maxlength']
+                : null
+            "
+          >
+            Confirm Password must be at most
+            {{
+              confirmPassword.errors
+                ? confirmPassword.errors["maxlength"].requiredLength
+                : ""
+            }}
+            characters long. You have used
+            {{
+              confirmPassword.errors
+                ? confirmPassword.errors["maxlength"].actualLength
+                : ""
+            }}.
+          </span>
+        </span>
+      </div>
+
+      <span
+        *ngIf="
+          !form.valid &&
+          form.touched &&
+          password.touched &&
+          password.valid &&
+          confirmPassword.touched &&
+          confirmPassword.valid
+        "
+        class="form-error-message"
+      >
+        <span *ngIf="form.errors ? form.errors['match_error'] : null">
+          Password and Confirm Password do not match
+        </span>
+      </span>
 
       <div class="button-container">
-        <button color="primary" mat-raised-button>Sign up</button>
+        <button [disabled]="!form.valid" class="btn btn-primary" type="submit">
+          Submit
+        </button>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

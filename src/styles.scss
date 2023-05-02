@@ -1,23 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use '@angular/material' as mat;
-
-@include mat.core();
-
-// Define a dark theme
-$dark-theme: mat.define-dark-theme((
-  color: (
-    primary: mat.define-palette(mat.$pink-palette),
-    accent: mat.define-palette(mat.$blue-grey-palette),
-  ),
-  // Only include `typography` and `density` in the default dark theme.
-  typography: mat.define-typography-config(),
-  density: 0,
-));
-
-@include mat.core-theme($dark-theme);
-@include mat.button-theme($dark-theme);
-
 * {
   margin: 0;
   padding: 0;
@@ -30,4 +12,8 @@ html, body {
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-error-message {
+  color: red;
 }
